@@ -41,6 +41,17 @@ Ground-truth association is performed using **ID-based mapping**, followed by sy
 
 ---
 
+## Implementation Details
+
+- **Language:** Python  
+- **Deep Learning Framework:** PyTorch / TensorFlow  
+- **Model Architecture:** Conditional GAN (U-Net Generator + PatchGAN Discriminator)  
+- **Image Processing:** OpenCV (grayscale conversion, resizing, CLAHE)  
+- **Numerical & Visualization:** NumPy, Matplotlib  
+- **Development Environment:** Jupyter Notebook  
+
+---
+
 ## Preprocessing Pipeline
 
 All fingerprint images pass through a standardized preprocessing pipeline:
@@ -70,10 +81,7 @@ All fingerprint images pass through a standardized preprocessing pipeline:
 
 #### Generator
 - U-Net–based encoder–decoder architecture
-- Encoder captures:
-  - Ridge flow
-  - Orientation fields
-  - Structural patterns
+- Encoder captures ridge flow, orientation fields, and structural patterns
 - Decoder reconstructs enhanced fingerprints
 - Skip connections preserve high-frequency ridge and minutiae details
 
@@ -98,10 +106,7 @@ The generator is conditioned directly on the latent fingerprint input to reduce 
   - Adversarial loss for realism
   - Reconstruction loss for structural consistency
 
-Qualitative outputs are saved across epochs to monitor:
-- Noise suppression
-- Ridge continuity
-- Orientation stabilization
+Qualitative outputs are saved across epochs to monitor noise suppression, ridge continuity, and orientation stabilization.
 
 ---
 
@@ -116,30 +121,14 @@ Evaluation focuses on **structural fingerprint quality**, using metrics derived 
 - Orientation consistency
 - Ridge strength
 
-This approach prioritizes ridge clarity and alignment over raw pixel similarity.
+This prioritizes ridge alignment and continuity over raw pixel similarity.
 
 ---
 
 ## Observations
 
-- GAN-based enhancement produces:
-  - Clearer ridge patterns
-  - More consistent orientation flow
-  - Better robustness to background noise
-- KNN-based enhancement shows:
-  - Over-smoothing due to averaging
-  - Sensitivity to noise and low contrast
-  - Instability across degraded samples
+- GAN-based enhancement produces clearer ridge patterns and more consistent orientation flow
+- Improved robustness to background noise and partial prints
+- KNN-based enhancement suffers from over-smoothing and instability on degraded inputs
 
 Overall, the conditional GAN approach demonstrates stronger structural enhancement for latent fingerprints compared to classical interpolation-based methods.
-
----
-
-## Tech Stack
-
-- Python
-- PyTorch / TensorFlow
-- OpenCV (image preprocessing, CLAHE)
-- NumPy, Matplotlib
-- Jupyter Notebook
-
